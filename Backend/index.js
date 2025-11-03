@@ -24,6 +24,8 @@ app.use(
   })
 );
 
+
+
 app.use("/api/auth", authRouter);
 app.use("/api/todo", todoRouter);
 app.use("/api/expense", expenseRouter);
@@ -36,4 +38,4 @@ app.listen(PORT, async () => {
   } catch (error) {
     console.log("Internal error. Server didn't start");
   }
-});
+})
