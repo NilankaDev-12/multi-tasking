@@ -52,11 +52,20 @@ export const login = async (req, res) => {
       });
     }
 
+    const isProduction = process.env.NODE_ENV === "production";
+
     const token = generateToken({ email });
+
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: isProduction, // ✅ true on Render, false locally
+      sameSite: isProduction ? "none" : "lax", // ✅ 'none' needed for cross-domain
+      maxAge: 7 * 24 * 60 * 60 * 1000, // optional: 7 days
+    });
+
+    res.status(200).json({
+      message: "Login successful",
+      success: true,
     });
     res.status(200).json({
       message: "Login successful",
@@ -98,6 +107,11 @@ export const protectedRoute = (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.clearCookie("token");
-  res.json({ message: "Logged out" });
+  res.clearCookie("token", {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+});
+res.json({ message: "Logged out" });
+
 };

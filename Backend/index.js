@@ -15,16 +15,23 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+// ✅ Allow both local & deployed frontend
+const allowedOrigins = [
+  "https://nilanka-multi-tasking.netlify.app",
+  "http://localhost:5173", // for local testing
+];
+
 app.use(express.json());
 app.use(cookieParser());
+
+app.set("trust proxy", 1); // ✅ Required for Render (HTTPS proxy)
+
 app.use(
   cors({
-    origin: "https://nilanka-multi-tasking.netlify.app",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
-
-
 
 app.use("/api/auth", authRouter);
 app.use("/api/todo", todoRouter);
@@ -34,8 +41,8 @@ app.use("/api/savings", savingRouter);
 app.listen(PORT, async () => {
   try {
     await connectDB();
-    console.log(`🚀 Server is running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on port ${PORT}`);
   } catch (error) {
-    console.log("Internal error. Server didn't start");
+    console.error("Internal error. Server didn't start", error);
   }
-})
+});
