@@ -89,7 +89,7 @@ const Home = () => {
           {/* Stats Section */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div className="bg-blue-500/20 rounded-2xl p-4 text-center border border-blue-500/30">
-              <div className="text-2xl font-bold text-white">3+</div>
+              <div className="text-2xl font-bold text-white">2</div>
               <div className="text-blue-300 text-sm">Features</div>
             </div>
             <div className="bg-purple-500/20 rounded-2xl p-4 text-center border border-purple-500/30">
