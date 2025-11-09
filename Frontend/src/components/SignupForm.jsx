@@ -45,7 +45,7 @@ const SignupForm = ({ formData, isLoading, handleChange, handleSubmit }) => {
 
   const getPasswordStrengthText = (strength) => {
     const texts = [
-      "Very Weak",
+      "Very Strong",
       "Weak", 
       "Fair",
       "Good",
