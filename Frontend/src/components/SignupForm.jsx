@@ -51,7 +51,7 @@ const SignupForm = ({ formData, isLoading, handleChange, handleSubmit }) => {
       "Good",
       "Strong"
     ];
-    return texts[strength] || "Very Weak";
+    return texts[strength] || "Very Strong";
   };
 
   // Check if all requirements are met
